@@ -1,0 +1,18 @@
+.rightAligned {
+    text-align: right;
+}
+
+#signupFormWrapper .infoText {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.signUpForm {
+    margin-top: 15px;
+}
+
+#signUpBody {
+    width: 80%;
+    margin: 30px auto 0;
+}

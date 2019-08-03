@@ -1,0 +1,31 @@
+#profileKeepOldPictureButton {
+    margin-top: 32px;
+}
+
+#currentProfilePictureWrapper {
+    margin-top: 50px;
+}
+
+#currentProfilePictureWrapper img {
+    margin: 0 auto;
+}
+
+#currentProfilePictureWrapper .title, #profilePictureEditSection .imagePreviewWrapper .title {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#profilePictureEditSection {
+    margin-top: 25px;
+}
+
+#profilePictureEditSection .imagePreviewWrapper {
+    margin-top: 25px;
+}
+
+#profilePictureEditSection .imagePreviewWrapper img {
+    display: block;
+    max-height: 300px;
+    margin: 15px auto 0;
+}

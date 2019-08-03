@@ -1,0 +1,32 @@
+#uploadProgramForm .formElement {
+    display: block;
+    margin-top: 30px;
+}
+
+#uploadProgramForm .formCustomizationWrapper {
+    margin-top: 30px;
+}
+
+#uploadProgramForm .formCustomizationWrapper .applicationDestinationWrapper {
+    margin-bottom: 40px;
+}
+
+#uploadProgramForm .formCustomizationWrapper h2 {
+    font-size: 1.2em;
+}
+
+#uploadProgramForm .formCustomizationWrapper .customQuestionWrapper {
+    margin-bottom: 60px;
+}
+
+#uploadProgramForm .formCustomizationWrapper .customQuestionWrapper .questionCheckbox {
+    margin-top: 15px;
+}
+
+#uploadProgramForm .formCustomizationWrapper .customQuestionWrapper .deleteButtonWrapper {
+    margin-top: 10px;
+}
+
+#uploadProgramForm .formCustomizationWrapper .addQuestionButtonWrapper {
+    margin-top: 30px;
+}
