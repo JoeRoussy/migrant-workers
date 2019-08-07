@@ -10,12 +10,6 @@ import './styles.css';
 
 import { isEmail, isPassword, isText } from '../../../../common/validation';
 
-const {
-    USER_TYPES: {
-        ORGANISATION: ORGANISATION_TYPE
-    }
-} = constants;
-
 const validate = (values) => {
     let errors = {};
 
@@ -74,11 +68,9 @@ const SignUpForm = ({
     isProcessing,
     valid,
     errorMessage,
-    className,
-    userType
+    className
 }) => (
     <Form className={className} onSubmit={onSubmit} error={!!errorMessage}>
-        {userType === ORGANISATION_TYPE ? 'TODO... orgnaisation specific sign up fields' : ''}
         <Message
             error
             header='Error'

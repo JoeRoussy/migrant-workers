@@ -4,13 +4,11 @@ import { Redirect } from 'react-router';
 import { Container } from 'semantic-ui-react';
 
 import SignUpBody from '../../components/SignUpBody';
-import { chooseUserType, submitForm } from '../../../redux/actions/signupActions';
+import { submitForm } from '../../../redux/actions/signupActions';
 
 import './styles.css';
 
 const Signup = ({
-    userType,
-    chooseUser,
     onSubmit,
     formValues,
     isFormProcessing,
@@ -24,8 +22,6 @@ const Signup = ({
             <h1>Sign Up</h1>
             {userRedirect}
             <SignUpBody
-                userType={userType}
-                chooseUser={chooseUser}
                 onSubmit={onSubmit}
                 formValues={formValues}
                 isFormProcessing={isFormProcessing}
@@ -37,7 +33,6 @@ const Signup = ({
 
 const mapStateToProps = ({
     signUpReducer: {
-        userType,
         isFormProcessing,
         errorMessage
     } = {},
@@ -50,7 +45,6 @@ const mapStateToProps = ({
         user
     } = {}
 }) => ({
-    userType,
     isFormProcessing,
     formValues: values,
     user,
@@ -58,7 +52,6 @@ const mapStateToProps = ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-    chooseUser: (type) => dispatch(chooseUserType(type)),
     onSubmit: (formData, userType) => () => dispatch(submitForm(formData, userType))
 });
 

@@ -1,8 +1,4 @@
 const constants = {
-    USER_TYPES: {
-        CLIENT: 'client',
-        ORGANISATION: 'organisation'
-    },
     ERRORS: {
         SIGN_UP: {
             EXISTING_EMAIL: 'errors_sign_up_existing_email',
@@ -18,11 +14,6 @@ const constants = {
         PROFILE_EDIT: {
             GENERIC: 'profile_edit_errors_generic',
             INCORRECT_PASSWORD: 'profile_edit_errors_incorrect_password'
-        },
-        PASSWORD_RESET: {
-            INVALID_TOKEN: 'password_reset_errors_invalid_token',
-            GENERIC: 'password_reset_errors_generic',
-            NO_USER_FOR_EMAIL: 'password_reset_errors_no_user_for_email'
         },
         IMAGE_PROCESSING: {
             GENERIC: 'image_processing_generic_error'

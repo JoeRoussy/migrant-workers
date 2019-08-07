@@ -21,6 +21,7 @@ export const isEmail = (value) => {
 
 export const isPassword = (value, checkLength = true) => {
     if (!isText(value)) {
+        console.log('the password is not text')
         return false;
     }
 
@@ -32,6 +33,9 @@ export const isPassword = (value, checkLength = true) => {
     const {
         MIN_PASSWORD_LENGTH
     } = process.env;
+
+    console.log(value.length)
+    console.log(MIN_PASSWORD_LENGTH)
 
     // Coerce password length into a number before making the comparisson
     return value.length >= +MIN_PASSWORD_LENGTH;

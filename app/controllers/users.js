@@ -4,7 +4,6 @@ import jwt from 'jsonwebtoken';
 import { required, print, isEmpty, extendIfPopulated, convertToObjectId } from '../components/custom-utils';
 import { generateHash as generatePasswordHash, comparePasswords } from '../components/authentication';
 import { transformUserForOutput } from '../components/transformers';
-import { sendSignUpMessage } from '../components/mail-sender';
 import { sendError } from './utils';
 import {
     getUserByEmail,
@@ -24,10 +23,6 @@ import {
 import constants from '../../common/constants';
 
 const {
-    USER_TYPES: {
-        CLIENT: CLIENT_TYPE,
-        ORGANISATION: ORGANISATION_TYPE
-    } = {},
     ERRORS: {
         SIGN_UP: {
             EXISTING_EMAIL: EXISTING_EMAIL_ERROR,
@@ -98,8 +93,7 @@ export const createUser = ({
         body: {
             name,
             email,
-            password,
-            userType
+            password
         } = {},
         file: {
             filename,
@@ -123,23 +117,14 @@ export const createUser = ({
         profilePictureLink = `${UPLOADS_RELATIVE_PATH}${filename}`
     }
 
-    if (!name || !email || !password || !userType) {
+    if (!name || !email || !password) {
         logger.warn(req.body, 'Malformed body for user creation');
 
         return sendError({
             res,
             status: 400,
-            message: 'Creating a user requires a name, an email, a password, and a user type',
+            message: 'Creating a user requires a name, an email, and a password',
             errorKey: MISSING_VALUES_SIGN_UP_ERROR
-        });
-    }
-
-    if (!(userType === CLIENT_TYPE || userType === ORGANISATION_TYPE)) {
-        return sendError({
-            res,
-            status: 400,
-            message: `userType must be either "${CLIENT_TYPE}" or "${ORGANISATION_TYPE}"`,
-            errorKey: INVALID_VALUES_SIGN_UP_ERROR
         });
     }
 
@@ -183,7 +168,6 @@ export const createUser = ({
                 name,
                 email,
                 password: hashedPassword,
-                type: userType,
                 isEmailConfirmed: false,
                 isInactive: false,
                 profilePictureLink
@@ -192,59 +176,6 @@ export const createUser = ({
         });
     } catch (e) {
         logger.error({ err: e, name, email }, 'Error saving new user to database');
-
-        return sendError({
-            res,
-            status: 500,
-            message: 'Could not sign up',
-            errorKey: GENERIC_SIGN_UP_ERROR
-        });
-    }
-
-    // Make a confirmation document tied to the current user to confirm the email.
-    let emailConfirmationLink;
-    try {
-        emailConfirmationLink = yield getEmailConfirmationLink({
-            verificationsCollection,
-            user: savedUser
-        });
-    } catch (e) {
-        logger.error(e, 'Error making confirmation document for new user');
-
-        // Delete the user we made
-        deleteById({
-            collection: usersCollection,
-            id: savedUser._id
-        })
-            .catch((e) => {
-                logger.error({ user, err: e }, 'Could not delete user after failed confirmation document creation');
-            });
-
-        return sendError({
-            res,
-            status: 500,
-            message: 'Could not sign up',
-            errorKey: GENERIC_SIGN_UP_ERROR
-        });
-    }
-
-    // Send a welcome email to the user
-    try {
-        yield sendSignUpMessage({
-            user: savedUser,
-            emailConfirmationLink
-        });
-    } catch (e) {
-        // Log an error about not being able to send the email and try and delete the user we just made
-        logger.error(e, 'Could not send welcome email to user');
-
-        deleteById({
-            collection: usersCollection,
-            id: savedUser._id
-        })
-            .catch((e) => {
-                logger.error({ user, err: e }, 'Could not delete user after failed email send during user creation');
-            });
 
         return sendError({
             res,

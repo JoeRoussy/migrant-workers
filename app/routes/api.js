@@ -3,7 +3,6 @@ import { required } from '../components/custom-utils';
 
 import usersRouter from './users';
 import verifyRouter from './verify';
-import passwordResetRouter from './passwordReset';
 import programsRouter from './programs';
 
 export default ({
@@ -19,11 +18,6 @@ export default ({
     }));
 
     router.use('/verify', verifyRouter({
-        db,
-        baseLogger
-    }));
-
-    router.use('/passwordReset', passwordResetRouter({
         db,
         baseLogger
     }));

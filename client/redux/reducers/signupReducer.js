@@ -22,18 +22,6 @@ const signUpReducer = (state = config, actions) => {
     } = actions;
 
     switch (actionType) {
-        case 'USER_TYPE_CHOSEN': {
-            const {
-                type
-            } = payload;
-
-            state = {
-                ...state,
-                userType: type
-            }
-
-            break;
-        }
         case 'SIGN_UP_FORM_SUBMIT': {
             state = {
                 ...state,

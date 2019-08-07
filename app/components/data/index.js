@@ -14,9 +14,6 @@ const {
     VERIFICATION_TYPES: {
         EMAIL: EMAIL_VERIFICATION_TYPE
     } = {},
-    PASSWORD_RESET: {
-        MAX_REQUEST_DAYS: PASSWORD_RESET_DURATION_DAYS
-    } = {}
 } = constants;
 
 
@@ -86,57 +83,6 @@ export const findUsersByName = async({
 }
 
 
-// Makes a verification document and returns a link a user can use to verify their email
-export const getEmailConfirmationLink = async({
-    user = required('user'),
-    verificationsCollection = required('verificationsCollection')
-}) => {
-    const {
-        _id: userId
-    } = user;
-
-    const {
-        ROOT_URL = required('ROOT_URL'),
-    } = process.env;
-
-    const urlIdentifyer = await getUniqueHash(user);
-
-    // Now save the verification document
-    try {
-        await insertInDb({
-            collection: verificationsCollection,
-            document: {
-                urlIdentifyer,
-                userId,
-                isCompeted: false,
-                type: EMAIL_VERIFICATION_TYPE
-            }
-        })
-    } catch (e) {
-        throw new RethrownError(e, `Error creating email verification document for user with id: ${userId}`);
-    }
-
-    // Return a link the user can use to confirm their profile
-    return `${ROOT_URL}/api/verify/email/${urlIdentifyer}`;
-};
-
-
-export const findVerificationDocument = async({
-    verificationsCollection = required('verificationsCollection'),
-    urlIdentifyer = required('urlIdentifyer'),
-    type = required('type')
-}) => {
-    try {
-        return await verificationsCollection.findOne({
-            urlIdentifyer,
-            type
-        });
-    } catch (e) {
-        throw new RethrownError(e, `Error finding verification document of type: ${type} with urlIdentifyer: ${urlIdentifyer}`);
-    }
-};
-
-
 // Mark a user as inactive if they delete their profile
 export const removeUserById = async({
     id = required('id'),
@@ -158,49 +104,6 @@ export const removeUserById = async({
 };
 
 
-// Returns a user wrapped in an envalope: { user }
-export const getUserForPasswordReset = async({
-    passwordResetsCollection = required('passwordResetsCollection'),
-    urlIdentifyer = required('urlIdentifyer')
-}) => {
-    const maxRequestDuration = PASSWORD_RESET_DURATION_DAYS;
-    const maxPossibleDateString = moment().add(maxRequestDuration, 'days').endOf('day').toISOString();
-
-    try {
-        return await passwordResetsCollection.aggregate([
-            {
-                $match: {
-                    urlIdentifyer,
-                    createdAt: {
-                        $lte: new Date(maxPossibleDateString) // Need to pass a Date to mongo (not a moment)
-                    },
-                    expired: {
-                        $ne: true
-                    }
-                }
-            },
-            {
-                $lookup: {
-                    from: 'users',
-                    localField: 'userId',
-                    foreignField: '_id',
-                    as: 'users'
-                }
-            },
-            {
-                $project: {
-                    _id: 0,
-                    passwordResetId: '$_id',
-                    user: { $arrayElemAt: [ '$users', 0 ] }
-                }
-            }
-        ]).toArray();
-    } catch (e) {
-        throw new RethrownError(`Could not find user for password reset with urlIdentifyer: ${urlIdentifyer}`);
-    }
-};
-
-
 export const getUsersById = async({
     usersCollection = required('usersCollection'),
     ids = required('ids')
@@ -210,39 +113,6 @@ export const getUsersById = async({
     } catch (e) {
         throw new RethrownError(e, `Error could not find users by ids: ${ids}`);
     }
-};
-
-
-// Makes a password reset document and returns a link a user can use to reset their password
-export const getPasswordResetLink = async({
-    passwordResetsCollection = required('passwordResetsCollection'),
-    user = required('user')
-}) => {
-    const {
-        _id: userId
-    } = user;
-
-    const {
-        FRONT_END_ROOT = required('FRONT_END_ROOT')
-    } = process.env;
-
-    const urlIdentifyer = await getUniqueHash(user);
-
-    try {
-        await insertInDb({
-            collection: passwordResetsCollection,
-            document: {
-                userId: userId,
-                urlIdentifyer,
-                expired: false
-            }
-        });
-    } catch (e) {
-        throw new RethrownError(e, `Error inserting password reset document for user with id: ${userId}`);
-    }
-
-    // Now make a link to reset the email
-    return `${FRONT_END_ROOT}/?passwordResetToken=${urlIdentifyer}`;
 };
 
 
