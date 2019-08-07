@@ -25,7 +25,7 @@ const {
 } = process.env;
 
 global.Logger = getLogger({
-    name: 'circ',
+    name: 'migrant-worker',
     rotatingFile: LOG_ROTATING_FILE,
     errorFile: LOG_ERROR_FILE
 });
