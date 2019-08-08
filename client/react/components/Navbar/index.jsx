@@ -39,25 +39,32 @@ const NavBar = ({
             </Menu.Item>
         ];
     } else {
-        rightSection = [
+        const registerLink = (
             <Menu.Item key='sign-up-link' onClick={() => navigateTo('/sign-up')}>
                 <Icon name='signup'/>Register
-            </Menu.Item>,
+            </Menu.Item>
+        );
+
+        const loginLink = (
             <Menu.Item key='sign-in-link' onClick={() => navigateTo('/sign-in')}>
                 <Icon name='signup'/>Log In
             </Menu.Item>
-        ];
+        );
+
+        rightSection = process.env.REGISTRATION_ENABLED
+            ? [registerLink, loginLink]
+            : loginLink;
     }
 
-    const programsLink = user && user.type == ORGANISATION ? (
-        <Menu.Item onClick={() => navigateTo('/my-programs')}>My Programs</Menu.Item>
-    ) : '';
+    const programUploadSection = user
+        ? <Menu.Item header onClick={() => navigateTo('/upload-programs')}>Upload Programs</Menu.Item>
+        : '';
 
     return (
         <Menu fixed='top'>
             <Container>
                 <Menu.Item id='navLogo' header onClick={() => navigateTo('/')}><Image src='/images/logo.svg' size='small' /></Menu.Item>
-                {programsLink}
+                {programUploadSection}
                 <Menu.Menu position='right'>
                     {rightSection}
                 </Menu.Menu>

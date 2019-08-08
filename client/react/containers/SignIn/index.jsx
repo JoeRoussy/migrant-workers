@@ -20,9 +20,6 @@ const SignIn = ({
     <Container className='rootContainer'>
         <h1>Log In</h1>
         {user ? (<Redirect to='/'/>) : ('')}
-        <div id='forgotPasswordButtonWrapper'>
-            <Button type='button' onClick={() => navigateTo('/forgot-password')}>Forgot Password?</Button>
-        </div>
         <SignInForm
             onSubmit={onSubmit(formValues)}
             isProcessing={isFormProcessing}

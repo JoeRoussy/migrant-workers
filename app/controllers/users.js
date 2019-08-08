@@ -105,8 +105,17 @@ export const createUser = ({
     const {
         UPLOADS_RELATIVE_PATH,
         DEFAULT_PROFILE_PICTURE_RELATIVE_PATH,
-        JWT_SECRET
+        JWT_SECRET,
+        REGISTRATION_ENABLED
     } = process.env;
+
+    if (!REGISTRATION_ENABLED) {
+        return sendError({
+            res,
+            status: 400,
+            message: 'Creating a user is not allowed at this time'
+        });
+    }
 
     // Start with the default profile picture
     let profilePictureLink = DEFAULT_PROFILE_PICTURE_RELATIVE_PATH;
