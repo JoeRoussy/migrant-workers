@@ -7,7 +7,7 @@ import { reducer as formReducer } from 'redux-form';
 import userReducer from './userReducer';
 import signUpReducer from './signupReducer';
 import signInReducer from './signInReducer';
-import uploadProgramReducer from './uploadProgramReducer';
+import uploadProgramsReducer from './uploadProgramsReducer';
 import myProgramsReducer from './myProgramsReducer';
 
 const reducers = combineReducers({
@@ -15,7 +15,7 @@ const reducers = combineReducers({
     form: formReducer,
     signUpReducer,
     signInReducer,
-    uploadProgramReducer,
+    uploadProgramsReducer,
     myProgramsReducer
 });
 

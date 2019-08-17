@@ -64,16 +64,17 @@ export const handleUserUpdateRequest = ({
 }
 
 // Takes formData as json and keys containing image data and builds form submission data for it
-export const buildFormSubmissionData = (formData, imageFileNames) => {
+export const buildFormSubmissionData = (formData, fileNames) => {
     const submissionData = new FormData();
 
     Object.keys(formData).forEach((key) => {
-        if (imageFileNames.includes(key)) {
+        if (fileNames.includes(key)) {
             if (Array.isArray(formData[key])) {
-                formData[key].forEach((image) => submissionData.append(key, image));
+                formData[key].forEach((file) => submissionData.append(key, file, file.name));
             } else {
-                // In this case, the form field has just one image, but does not have a 'forEach' method
-                submissionData.append(key, formData[key][0]);
+                // In this case, the form field has just file image, but does not have a 'forEach' method
+                const file = formData[key][0]
+                submissionData.append(key, file, file.name);
             }
         } else {
             submissionData.append(key, formData[key]);
