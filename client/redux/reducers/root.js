@@ -8,7 +8,7 @@ import userReducer from './userReducer';
 import signUpReducer from './signupReducer';
 import signInReducer from './signInReducer';
 import uploadProgramsReducer from './uploadProgramsReducer';
-import myProgramsReducer from './myProgramsReducer';
+import programSearchReducer from './programSearchReducer';
 
 const reducers = combineReducers({
     userReducer,
@@ -16,7 +16,7 @@ const reducers = combineReducers({
     signUpReducer,
     signInReducer,
     uploadProgramsReducer,
-    myProgramsReducer
+    programSearchReducer
 });
 
 export default reducers;

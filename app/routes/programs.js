@@ -7,7 +7,7 @@ import {
     error as handleUploadError
 } from '../components/upload-middleware';
 
-import { createProgram, deletePrograms } from '../controllers/programs';
+import { createProgram, deletePrograms, getPrograms } from '../controllers/programs';
 import { isAuthenticated } from '../controllers/utils';
 
 import constants from '../../common/constants';
@@ -61,6 +61,16 @@ export default ({
             })
         })
     ]);
+
+    programRouter.get('/', getPrograms({
+        programsCollection: db.collection('programs'),
+        logger: getChildLogger({
+            baseLogger,
+            additionalFields: {
+                module: 'api-get-programs'
+            }
+        })
+    }));
 
     return programRouter;
 }

@@ -1,18 +1,18 @@
 
 const config = {
-    programs: [],
-    loading: false,
+    results: [],
+    isLoading: false,
     error: false
 };
 
-const myProgramsReducer = (state = config, actions) => {
+const programSearchReducer = (state = config, actions) => {
     const {
         type: actionType,
         payload
     } = actions;
 
     switch (actionType) {
-        case 'GET_MY_PROGRAMS_PENDING': {
+        case 'GET_PROGRAMS_BY_TYPE_PENDING': {
             state = {
                 ...state,
                 loading: true,
@@ -21,7 +21,7 @@ const myProgramsReducer = (state = config, actions) => {
 
             break;
         }
-        case 'GET_MY_PROGRAMS_FULFILLED': {
+        case 'GET_PROGRAMS_BY_TYPE_FULFILLED': {
 
             state = {
                 ...state,
@@ -31,7 +31,7 @@ const myProgramsReducer = (state = config, actions) => {
 
             break;
         }
-        case 'GET_MY_PROGRAMS_REJECTED': {
+        case 'GET_PROGRAMS_BY_TYPE_REJECTED': {
             state = {
                 ...state,
                 loading: false,
@@ -46,4 +46,4 @@ const myProgramsReducer = (state = config, actions) => {
     return state;
 }
 
-export default myProgramsReducer;
+export default programSearchReducer;

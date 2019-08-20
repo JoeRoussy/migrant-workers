@@ -8,6 +8,7 @@ import SignUp from '../Signup';
 import SignIn from '../SignIn';
 import UploadPrograms from '../UploadPrograms';
 import MyPrograms from '../MyPrograms';
+import ProgramSearchResults from '../ProgramSearchResults';
 import Footer from '../../components/Footer'
 import './styles.css';
 import 'react-toastify/dist/ReactToastify.min.css';
@@ -24,6 +25,7 @@ const App = () => (
             <Route exact path="/sign-in" component={SignIn} />
             <Route exact path="/upload-programs" component={UploadPrograms} />
             <Route exact path="/my-programs" component={MyPrograms} />
+            <Route exact path="/programs/?type=:programType" component={ProgramSearchResults} />
         </main>
         <footer>
             <Footer />

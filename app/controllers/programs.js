@@ -77,3 +77,18 @@ export const deletePrograms = ({
         ok: true
     });
 });
+
+export const getPrograms = ({
+    programsCollection = required('programsCollection'),
+    logger = required('logger', 'You must pass a logging instance for this function to use')
+}) => coroutine(function* (req, res) {
+    let programs = [];
+
+    if (req.query.type) {
+        programs = yield programsCollection.find({ programType: type });
+    } else {
+        programs = yield programsCollection.find({});
+    }
+
+    return res.json({ programs });
+});
