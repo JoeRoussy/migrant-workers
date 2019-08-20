@@ -11,8 +11,6 @@ export const submitForm = (formData) => (dispatch) => {
 
     const submissionData = buildFormSubmissionData(formData, [ 'programs' ]);
 
-    console.log(submissionData)
-
     axios.post(`${process.env.API_ROOT}/api/programs`, submissionData)
         .then((res) => {
             toast.success('Programs successfuly uploaded.');
@@ -32,3 +30,14 @@ export const submitForm = (formData) => (dispatch) => {
             });
         })
 };
+
+export const deletePrograms = () => ({
+    type: 'DELETE_PROGRAMS',
+    payload: axios.delete(`${process.env.API_ROOT}/api/programs`)
+        .then(() => {
+            toast.success('Programs successfuly deleted.');
+        })
+        .catch(() => {
+            toast.error('Error deleting programs.');
+        })
+});

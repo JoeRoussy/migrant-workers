@@ -1,10 +1,12 @@
 import { wrap as coroutine } from 'co';
+import csv from 'fast-csv';
+import fs from 'fs';
 
 import { required } from '../components/custom-utils';
 import { sendError } from './utils';
 import { insert as insertInDb } from '../components/db/service';
 import { convertToObjectId } from '../components/custom-utils';
-import { getProgramsForUser } from '../components/data';
+import { getProgramsForUser, getProgramTypeByName } from '../components/data';
 
 import constants from '../../common/constants';
 
@@ -25,39 +27,34 @@ export const createProgram = ({
     programsCollection = required('programsCollection'),
     logger = required('logger')
 }) => coroutine(function* (req, res) {
-    // const {
-    //     customQuestionName,
-    //     customQuestionRequired,
-    //     requiresApplication,
-    //     ...programProps
-    // } = req.body;
+    csv.parseFile(req.file.path, { headers: true })
+        .on('data', coroutine(function* (data) {
+            try {
+                yield insertInDb({
+                    collection: programsCollection,
+                    document: {
+                        name: data.name,
+                        address: data.address,
+                        programType: data.program_type
+                    }
+                });
+            } catch (e) {
+                logger.error(e, 'Error adding programs to db');
+            }
+        }))
+        .on('end', () => {
+            fs.unlinkSync(req.file.path);
+        })
+        .on('error', (e) => {
+            logger.error(e, 'Error parsing uploaded csv');
 
-    console.log(req.body)
-
-    // Now save the program itself
-    let program;
-
-    // try {
-    //     program = yield insertInDb({
-    //         collection: programsCollection,
-    //         document: {
-    //             ...programProps,
-    //             requiresApplication,
-    //             customQuestions,
-    //             createdById: convertToObjectId(req.user._id)
-    //         },
-    //         returnInsertedDocument: true
-    //     })
-    // } catch (e) {
-    //     logger.error(e, 'Error saving new program into db');
-
-    //     return sendError({
-    //         res,
-    //         status: 500,
-    //         message: 'There was an error saving the program',
-    //         errorKey: GENERIC_CREATE_ERROR
-    //     });
-    // }
+            return sendError({
+                res,
+                status: 500,
+                message: 'There was an error reading the csv upload.',
+                errorKey: GENERIC_FETCH_ERROR
+            });
+        });
 
     // Might want to send back the number of programs created
     return res.json({
@@ -66,46 +63,17 @@ export const createProgram = ({
     });
 });
 
-
-export const getMyPrograms = ({
+export const deletePrograms = ({
     programsCollection = required('programsCollection'),
     logger = required('logger', 'You must pass a logging instance for this function to use')
 }) => coroutine(function* (req, res) {
-    let programs;
-
     try {
-        programs = yield getProgramsForUser({
-            programsCollection,
-            userId: req.user._id
-        });
+        programsCollection.remove({});
     } catch (e) {
-        logger.error(e, 'Error getting programs for current user');
-
-        return sendError({
-            res,
-            status: 500,
-            message: 'There was an error saving the program',
-            errorKey: GENERIC_FETCH_ERROR
-        });
+        logger.error(e, 'Error deleting all programs');
     }
 
     return res.json({
-        programs
+        ok: true
     });
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

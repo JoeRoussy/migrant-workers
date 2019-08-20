@@ -26,7 +26,7 @@ const uploadProgramsReducer = (state = config, actions) => {
             state = {
                 ...state,
                 isProcessing: false
-            }
+            };
 
             break;
         }
@@ -45,7 +45,34 @@ const uploadProgramsReducer = (state = config, actions) => {
             state = {
                 ...state,
                 selectedFile: payload
-            }
+            };
+
+            break;
+        }
+
+        case 'DELETE_PROGRAMS_PENDING': {
+            state = {
+                ...state,
+                isProcessing: true
+            };
+
+            break;
+        }
+
+        case 'DELETE_PROGRAMS_FULFILLED': {
+            state = {
+                ...state,
+                isProcessing: false
+            };
+
+            break;
+        }
+
+        case 'DELETE_PROGRAMS_REJECTED': {
+            state = {
+                ...state,
+                isProcessing: false
+            };
 
             break;
         }

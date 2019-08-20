@@ -21,7 +21,6 @@ export const isEmail = (value) => {
 
 export const isPassword = (value, checkLength = true) => {
     if (!isText(value)) {
-        console.log('the password is not text')
         return false;
     }
 

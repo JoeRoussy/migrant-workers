@@ -4,7 +4,7 @@ import mime from 'mime-types';
 import { wrap as coroutine } from 'co';
 
 import { required } from '../custom-utils';
-import validateImage from '../validate-image';
+import validateImageHelper from '../validate-image';
 
 import constants from '../../../common/constants';
 
@@ -80,7 +80,7 @@ export const processFileUpload = ({
 
 // Ensures an images is valid by inspecting the contents of the image itself. Prevents a client of lying about the mimetype
 // NOTE: This function assumes there is already a parsed image file waiting in req.file
-export const validate = coroutine(function* (req, res, next) {
+export const validateImage = coroutine(function* (req, res, next) {
     const {
         file: {
             path
@@ -95,7 +95,7 @@ export const validate = coroutine(function* (req, res, next) {
     let isValid;
 
     try {
-        isValid = yield validateImage(path);
+        isValid = yield validateImageHelper(path);
     } catch (e) {
         return next(e);
     }
@@ -132,7 +132,7 @@ export const error = ({
 
     return res.status(500).json({
         error: true,
-        message: 'Error processing image',
+        message: 'Error processing uploaded file',
         errorKey: key
     });
 }

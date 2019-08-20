@@ -8,7 +8,8 @@ import FileInput from '../../components/FileInput';
 import ProgramsUploadForm from '../../components/ProgramsUploadForm'
 
 import {
-    submitForm
+    submitForm,
+    deletePrograms
 } from '../../../redux/actions/uploadProgramsActions';
 
 import './styles.css';
@@ -21,18 +22,22 @@ const UploadPrograms = ({
     isProcessing,
     valid,
     onProgramFileChange,
-    selectedFile
+    selectedFile,
+    onDeleteProgramsClicked
 }) => (
     <Authenticated test={!!user}>
         <Container className='rootContainer'>
             <h1>Upload Programs</h1>
-            <p className="centered">UPLOADING NEW PROGRAMS WILL REPLACE ANY EXISTING PROGRAMS.</p>
+            <p id="uploadProgramsWarning">Be sure to delete programs before uploading new CSVs!</p>
             <ProgramsUploadForm
                 onSubmit={onSubmit(formData)}
                 errorMessage={errorMessage}
                 isProcessing={isProcessing}
                 selectedFile={selectedFile}
             />
+            <div id="deleteProgramWrapper">
+                <Button color='red' loading={isProcessing} onClick={onDeleteProgramsClicked}>Delete All Programs</Button>
+            </div>
         </Container>
     </Authenticated>
 );
@@ -60,7 +65,8 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    onSubmit: (formData) => () => dispatch(submitForm(formData))
+    onSubmit: (formData) => () => dispatch(submitForm(formData)),
+    onDeleteProgramsClicked: () => dispatch(deletePrograms)
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UploadPrograms);

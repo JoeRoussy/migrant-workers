@@ -7,8 +7,8 @@ import { canModifyUser, isAuthenticated } from '../controllers/utils';
 import {
     processFileUpload as parseImageUpload,
     error as handleImageUploadError,
-    validate as validateImage
-} from '../components/image-upload-middleware';
+    validateImage
+} from '../components/upload-middleware';
 
 export default ({
     db = required('db'),

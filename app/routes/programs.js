@@ -2,9 +2,13 @@ import express from 'express';
 
 import { required } from '../components/custom-utils';
 import { getChildLogger } from '../components/log-factory';
+import {
+    processFileUpload,
+    error as handleUploadError
+} from '../components/upload-middleware';
 
-import { createProgram, getMyPrograms } from '../controllers/programs';
-import { isAuthenticatedAndOfType } from '../controllers/utils';
+import { createProgram, deletePrograms } from '../controllers/programs';
+import { isAuthenticated } from '../controllers/utils';
 
 import constants from '../../common/constants';
 
@@ -22,26 +26,37 @@ export default ({
     const programRouter = express.Router();
 
     programRouter.post('/', [
-        isAuthenticatedAndOfType(ORGANISATION_USER_TYPE),
+        isAuthenticated,
+        processFileUpload({
+            name: 'programs'
+        }),
         createProgram({
             programsCollection: db.collection('programs'),
             logger: getChildLogger({
                 baseLogger,
                 additionalFields: {
-                    module: 'api-create-program'
+                    module: 'api-create-programs'
+                }
+            })
+        }),
+        handleUploadError({
+            logger: getChildLogger({
+                baseLogger,
+                additionalFields: {
+                    module: 'api-programs-create-upload-errors'
                 }
             })
         })
     ]);
 
-    programRouter.get('/me',[
-        isAuthenticatedAndOfType(ORGANISATION_USER_TYPE),
-        getMyPrograms({
+    programRouter.delete('/', [
+        isAuthenticated,
+        deletePrograms({
             programsCollection: db.collection('programs'),
             logger: getChildLogger({
                 baseLogger,
                 additionalFields: {
-                    module: 'api-get-my-programs'
+                    module: 'api-delete-programs'
                 }
             })
         })

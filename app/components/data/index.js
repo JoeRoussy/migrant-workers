@@ -129,3 +129,14 @@ export const getProgramsForUser = async({
         throw new RethrownError(e, `Error finding programs for user with id: ${userId}`);
     }
 }
+
+export const getProgramTypeByName = async({
+    programTypesCollection = required('programTypesCollection'),
+    name = required('name')
+}) => {
+    try {
+        return await programTypesCollection.findOne({ name });
+    } catch (e) {
+        throw new RethrownError(e, `Error finding program by name ${name}`);
+    }  
+}

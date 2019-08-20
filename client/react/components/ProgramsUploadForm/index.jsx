@@ -44,7 +44,7 @@ const ProgramsUploadForm = ({
                 accept='.csv'
                 iconName='file outline'
             />
-            <Button type='submit' color='green' loading={isProcessing} disabled={!valid || isProcessing}>Upload Programs</Button>
+            <Button type='submit' color='green' loading= {isProcessing} disabled={!valid || isProcessing}>Upload Programs</Button>
         </Form>
     </div>
 );
