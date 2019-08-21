@@ -27,7 +27,8 @@ class Home extends Component {
     }
 
     onProgramSearchCardClicked(typeName) {
-        this.props.dispatch(push(`/programs/?type=${typeName}`));
+        this.props.dispatch(push(`/programs?type=${typeName}`));
+        //this.props.dispatch(push(`/programs`));
     }
 
     render(){

@@ -6,7 +6,7 @@ import './styles.css';
 const ProgramCard = ({
     program
 }) => (
-    <div class="programCard">
+    <div className="programCard">
         <h2>{program.name}</h2>
     </div>
 );

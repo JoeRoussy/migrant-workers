@@ -84,10 +84,23 @@ export const getPrograms = ({
 }) => coroutine(function* (req, res) {
     let programs = [];
 
-    if (req.query.type) {
-        programs = yield programsCollection.find({ programType: type });
-    } else {
-        programs = yield programsCollection.find({});
+    try {
+        if (req.query.type) {
+            programs = yield programsCollection
+                .find({ programType: req.query.type })
+                .toArray();
+        } else {
+            programs = yield programsCollection.find({}).toArray();
+        }
+    } catch (e) {
+        logger.error(e, 'Error getting programs');
+
+        return sendError({
+            res,
+            status: 500,
+            message: 'There was an error getting programs',
+            errorKey: GENERIC_FETCH_ERROR
+        });
     }
 
     return res.json({ programs });

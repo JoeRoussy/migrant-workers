@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
+import queryString from 'query-string';
 
 import { getProgramsByType } from '../../../redux/actions/programSearchActions';
 import ProgramCard from '../../components/ProgramCard';
 
 import './styles.css';
 
-export default class ProgramSearchResults extends React.Component {
+@connect((store)=>({
+    programs: store.programSearchReducer.results,
+}))
+
+class ProgramSearchResults extends React.Component {
     constructor(props) {
         super(props);
 
-        this.programType = this.props.match.params.programType;
+        const queryParams = queryString.parse(this.props.location.search);
+        this.programType = queryParams.type;
     }
 
     componentWillMount() {
@@ -18,16 +25,18 @@ export default class ProgramSearchResults extends React.Component {
     }
 
     render() {
-        const programCards = this.programs.map((program) => (
-            <ProgramCard program={program} />
+        const programCards = this.props.programs.map((program) => (
+            <ProgramCard program={program} key={program._id} />
         ));
 
         return (
             <Container id='programSearchResultsContainer' className='rootContainer'>
-                <div class="programCardWrapper">
+                <div className="programCardWrapper">
                     {programCards}
                 </div>
             </Container>
         );
     }
 }
+
+export default ProgramSearchResults;

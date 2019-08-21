@@ -26,7 +26,7 @@ const programSearchReducer = (state = config, actions) => {
             state = {
                 ...state,
                 loading: false,
-                programs: payload.data.programs
+                results: payload.data.programs
             };
 
             break;
@@ -35,7 +35,7 @@ const programSearchReducer = (state = config, actions) => {
             state = {
                 ...state,
                 loading: false,
-                programs: [],
+                results: [],
                 error: true
             };
 

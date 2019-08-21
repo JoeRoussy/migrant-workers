@@ -25,7 +25,7 @@ const App = () => (
             <Route exact path="/sign-in" component={SignIn} />
             <Route exact path="/upload-programs" component={UploadPrograms} />
             <Route exact path="/my-programs" component={MyPrograms} />
-            <Route exact path="/programs/?type=:programType" component={ProgramSearchResults} />
+            <Route exact path="/programs" component={ProgramSearchResults} />
         </main>
         <footer>
             <Footer />
