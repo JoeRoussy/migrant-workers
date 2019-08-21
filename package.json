@@ -86,7 +86,7 @@
     "redux-form": "7.4.2",
     "redux-promise-middleware": "5.1.1",
     "redux-thunk": "2.3.0",
-    "semantic-ui-react": "0.82.1",
+    "semantic-ui-react": "0.87.3",
     "style-loader": "0.21.0",
     "styled-components": "3.4.0",
     "webpack": "4.16.4",

@@ -47,6 +47,20 @@ const constants = {
     },
     AUTH: {
         SALT_ROUNDS: 12
+    },
+    PROGRAM_TYPES: {
+        HEALTH: "Health",
+        BIKES: "Bikes",
+        LEGAL: "Legal",
+        CLOTHES: "Clothes",
+        FOOD: "Food",
+        ESL: "ESL",
+        WIFI: "WIFI",
+        FINANCIAL_SERVICES: "Tax + Financial Services",
+        CHURCH: "Church",
+        ONLINE_LINKS: "Online Links",
+        WELCOME_SUPPORT: "Welcome Support",
+        EVENTS: "Events"
     }
 };
 

@@ -11,7 +11,7 @@ const ProgramSearchCard = ({
 }) => (
     <Card className='programSearchCard' onClick={onClick} color={color}>
         <div className='cardIconWrapper'>
-            <Icon name={iconName} size='massive' />
+            <Icon name={iconName} size='massive' color={color} />
         </div>
         <Card.Content>
             <Card.Header>{programType}</Card.Header>

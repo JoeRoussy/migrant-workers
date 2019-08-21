@@ -7,7 +7,6 @@ import Navbar from '../../components/Navbar';
 import SignUp from '../Signup';
 import SignIn from '../SignIn';
 import UploadPrograms from '../UploadPrograms';
-import MyPrograms from '../MyPrograms';
 import ProgramSearchResults from '../ProgramSearchResults';
 import Footer from '../../components/Footer'
 import './styles.css';
@@ -24,7 +23,6 @@ const App = () => (
             <Route exact path="/sign-up" component={SignUp} />
             <Route exact path="/sign-in" component={SignIn} />
             <Route exact path="/upload-programs" component={UploadPrograms} />
-            <Route exact path="/my-programs" component={MyPrograms} />
             <Route exact path="/programs" component={ProgramSearchResults} />
         </main>
         <footer>
