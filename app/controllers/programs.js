@@ -34,7 +34,12 @@ export const createProgram = ({
                     collection: programsCollection,
                     document: {
                         name: data.name,
-                        address: data.address,
+                        organizationName: data.organization_name,
+                        location: data.location,
+                        link: data.link,
+                        summary: data.summary,
+                        description: data.description,
+                        endDate: data.end_date,
                         programType: data.program_type
                     }
                 });
