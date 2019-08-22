@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import {reset} from 'redux-form';
 
 import { navigateTo as getNavigateTo } from '../../components';
 import { buildFormSubmissionData } from '../components'
@@ -20,8 +21,8 @@ export const submitForm = (formData) => (dispatch) => {
                 payload: res
             });
 
-            // TODO: This should redirect to the program details page (id will be in res.program._id)
-            getNavigateTo(dispatch)('/');
+            // NOTE: This resets the data in the programs form to prevent double submissions
+            dispatch(reset('programs'));
         })
         .catch((e) => {
             dispatch({

@@ -36,10 +36,12 @@ export const createProgram = ({
                         name: data.name,
                         organizationName: data.organization_name,
                         location: data.location,
+                        latitude: data.latitude,
+                        longitude: data.longitude,
                         link: data.link,
                         summary: data.summary,
                         description: data.description,
-                        endDate: data.end_date,
+                        endDate: data.end_date || null,
                         programType: data.program_type
                     }
                 });
