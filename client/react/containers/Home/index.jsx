@@ -57,78 +57,76 @@ class Home extends Component {
                         <h1 id='homeHeading'>Migrant Worker Site</h1>
                         <div id="programTileWrapper" className='ui cards centered'>
                             <ProgramSearchCard
-                                programType={HEALTH}
-                                onClick={() => this.onProgramSearchCardClicked(HEALTH)}
-                                iconName='plus square'
-                                color='red'
-                            />
-
-                            <ProgramSearchCard
-                                programType={FOOD}
-                                onClick={() => this.onProgramSearchCardClicked(FOOD)}
-                                iconName='food'
-                                color='teal'
-                            />
-                            
-                            <ProgramSearchCard
-                                programType={BIKES}
-                                onClick={() => this.onProgramSearchCardClicked(BIKES)}
-                                iconName='bicycle'
-                                color='orange'
+                                programType={HEALTH.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(HEALTH.NAME)}
+                                iconName={HEALTH.ICON}
+                                color={HEALTH.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={LEGAL}
-                                onClick={() => this.onProgramSearchCardClicked(LEGAL)}
-                                iconName='balance scale'
-                                color='brown'
+                                programType={FOOD.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(FOOD.NAME)}
+                                iconName={FOOD.ICON}
+                                color={FOOD.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={CLOTHES}
-                                onClick={() => this.onProgramSearchCardClicked(CLOTHES)}
-                                iconName='child'
-                                color='purple'
+                                programType={BIKES.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(BIKES.NAME)}
+                                iconName={BIKES.ICON}
+                                color={BIKES.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={ESL}
-                                onClick={() => this.onProgramSearchCardClicked(ESL)}
-                                iconName='file text'
-                                color='blue'
+                                programType={LEGAL.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(LEGAL.NAME)}
+                                iconName={LEGAL.ICON}
+                                color={LEGAL.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={WIFI}
-                                onClick={() => this.onProgramSearchCardClicked(WIFI)}
-                                iconName='wifi'
-                                color='violet'
+                                programType={CLOTHES.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(CLOTHES.NAME)}
+                                iconName={CLOTHES.ICON}
+                                color={CLOTHES.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={FINANCIAL_SERVICES}
-                                onClick={() => this.onProgramSearchCardClicked(FINANCIAL_SERVICES)}
-                                iconName='dollar sign'
-                                color='green'
+                                programType={ESL.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(ESL.NAME)}
+                                iconName={ESL.ICON}
+                                color={ESL.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={CHURCH}
-                                onClick={() => this.onProgramSearchCardClicked(CHURCH)}
-                                iconName='home'
-                                color='brown'
+                                programType={WIFI.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(WIFI.NAME)}
+                                iconName={WIFI.ICON}
+                                color={WIFI.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={ONLINE_LINKS}
-                                onClick={() => this.onProgramSearchCardClicked(ONLINE_LINKS)}
-                                iconName='linkify'
-                                color='red'
+                                programType={FINANCIAL_SERVICES.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(FINANCIAL_SERVICES.NAME)}
+                                iconName={FINANCIAL_SERVICES.ICON}
+                                color={FINANCIAL_SERVICES.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={WELCOME_SUPPORT}
-                                onClick={() => this.onProgramSearchCardClicked(WELCOME_SUPPORT)}
-                                iconName='handshake'
-                                color='olive'
+                                programType={CHURCH.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(CHURCH.NAME)}
+                                iconName={CHURCH.ICON}
+                                color={CHURCH.COLOR}
                             />
                             <ProgramSearchCard
-                                programType={EVENTS}
-                                onClick={() => this.onProgramSearchCardClicked(EVENTS)}
-                                iconName='newspaper'
-                                color='teal'
+                                programType={ONLINE_LINKS.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(ONLINE_LINKS.NAME)}
+                                iconName={ONLINE_LINKS.ICON}
+                                color={ONLINE_LINKS.COLOR}
+                            />
+                            <ProgramSearchCard
+                                programType={WELCOME_SUPPORT.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(WELCOME_SUPPORT.NAME)}
+                                iconName={WELCOME_SUPPORT.ICON}
+                                color={WELCOME_SUPPORT.COLOR}
+                            />
+                            <ProgramSearchCard
+                                programType={EVENTS.NAME}
+                                onClick={() => this.onProgramSearchCardClicked(EVENTS.NAME)}
+                                iconName={EVENTS.ICON}
+                                color={EVENTS.COLOR}
                             />
                         </div>
                     </Container>

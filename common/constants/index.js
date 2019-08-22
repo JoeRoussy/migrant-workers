@@ -49,18 +49,66 @@ const constants = {
         SALT_ROUNDS: 12
     },
     PROGRAM_TYPES: {
-        HEALTH: "Health",
-        BIKES: "Bikes",
-        LEGAL: "Legal",
-        CLOTHES: "Clothes",
-        FOOD: "Food",
-        ESL: "ESL",
-        WIFI: "WIFI",
-        FINANCIAL_SERVICES: "Tax + Financial Services",
-        CHURCH: "Church",
-        ONLINE_LINKS: "Online Links",
-        WELCOME_SUPPORT: "Welcome Support",
-        EVENTS: "Events"
+        HEALTH: {
+            NAME: "Health",
+            ICON: "plus square",
+            COLOR: "red"
+        },
+        BIKES: {
+            NAME: "Bikes",
+            ICON: "bicycle",
+            COLOR: "orange"
+        },
+        LEGAL: {
+            NAME: "Legal",
+            ICON: "balance scale",
+            COLOR: "brown"
+        },
+        CLOTHES: {
+            NAME: "Clothes",
+            ICON: "child",
+            COLOR: "purple"
+        },
+        FOOD: {
+            NAME: "Food",
+            ICON: "food",
+            COLOR: "teal"
+        },
+        ESL: {
+            NAME: "ESL",
+            ICON: "file text",
+            COLOR: "blue"
+        },
+        WIFI: {
+            NAME: "WIFI",
+            ICON: "wifi",
+            COLOR: "violet"
+        },
+        FINANCIAL_SERVICES: {
+            NAME: "Tax + Financial Services",
+            ICON: "dollar sign",
+            COLOR: "green"
+        },
+        CHURCH: {
+            NAME: "Church",
+            ICON: "home",
+            COLOR: "brown"
+        },
+        ONLINE_LINKS: {
+            NAME: "Online Links",
+            ICON: "linkify",
+            COLOR: "red"
+        },
+        WELCOME_SUPPORT: {
+            NAME: "Welcome Support",
+            ICON: "handshake",
+            COLOR: "olive"
+        },
+        EVENTS: {
+            NAME: "Events",
+            ICON: "newspaper",
+            COLOR: "teal"
+        }
     }
 };
 

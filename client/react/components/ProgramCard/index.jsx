@@ -1,24 +1,20 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Card } from 'semantic-ui-react';
 
 import './styles.css';
 
 const ProgramCard = ({
-    program
+    program,
+    onClick
 }) => (
-    <div className="programCard">
-        <h2>{program.name}</h2>
-    </div>
+    <Card onClick={onClick}>
+        <Card.Content>
+            <Card.Header>{program.name}</Card.Header>
+            <Card.Meta>{program.organizationName}</Card.Meta>
+            <Card.Meta>{program.location}</Card.Meta>
+            <Card.Description>{program.summary}</Card.Description>
+        </Card.Content>
+    </Card>
 );
 
-const mapStateToProps = ({
-
-}) => ({
-
-});
-
-const mapDispatchToProps = (dispatch) => ({
-
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(ProgramCard);
+export default ProgramCard;
