@@ -1,3 +1,11 @@
 #home .programUploadWrapper {
     text-align: center;
 }
+
+#programTileWrapper {
+    margin-top: 32px;
+}
+
+#homeSearchWrapper .siteDescription {
+    font-size: 16px;
+}

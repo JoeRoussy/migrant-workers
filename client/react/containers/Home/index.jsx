@@ -54,7 +54,12 @@ class Home extends Component {
                     <div id='heroOverlay'>
                     </div>
                     <Container id='homeSearchWrapper' className='rootContainer'>
-                        <h1 id='homeHeading'>Migrant Worker Site</h1>
+                        <h1 id='homeHeading'>Resources for Migrant Farmworkers - Ontario</h1>
+                        <div className="siteDescription centered">
+                            <p>Migrant farmworkers are important for Canadian farms. We know that it is not easy to do farm work, to leave your families, and to live in Canada.</p>
+                            <p>Through this website, we want to help you find the resources, people, and agencies that will make your time in Canada easier.</p>
+                            <p>If you know of any other resources not listed here, please email us at: <a href="mailto:migrantfarmworkers.ontario@gmail.com">migrantfarmworkers.ontario@gmail.com</a></p>
+                        </div>
                         <div id="programTileWrapper" className='ui cards centered'>
                             <ProgramSearchCard
                                 programType={HEALTH.NAME}

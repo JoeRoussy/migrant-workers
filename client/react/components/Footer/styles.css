@@ -28,3 +28,7 @@
 #footerContactSection .row {
     margin: 1em 0;
 }
+
+#footerTitle {
+    font-size: 20px;
+}

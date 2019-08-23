@@ -10,8 +10,8 @@ const Footer = () => (
         <div id='footerParent'>
             <Grid centered stackable columns={2} verticalAlign='middle'>
                 <Grid.Column textAlign='center'>
-                    <div>
-                        <Image id='footerLogo' src='/images/logo-white.svg'/>
+                    <div id='footerTitle'>
+                        Resources for Migrant Farmworkers - Ontario
                     </div>
                 </Grid.Column>
                 <Grid.Column id='footerContactSection' textAlign='center'>
@@ -20,11 +20,7 @@ const Footer = () => (
                     </div>
                     <div className='row'>
                         <Icon name='mail'/>
-                        <a className='besideIcon' href="mailto:something@email.com">TODO: Email</a>
-                    </div>
-                    <div className='row'>
-                        <Icon name='phone'/>
-                        <a className='besideIcon' href="tel:+15555555555">TODO: Phone number</a>
+                        <a className='besideIcon' href="mailto:migrantfarmworkers.ontario@gmail.com">migrantfarmworkers.ontario@gmail.com</a>
                     </div>
                 </Grid.Column>
             </Grid>

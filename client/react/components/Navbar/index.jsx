@@ -61,9 +61,9 @@ const NavBar = ({
         : '';
 
     return (
-        <Menu fixed='top'>
+        <Menu id='navbar' fixed='top'>
             <Container>
-                <Menu.Item id='navLogo' header onClick={() => navigateTo('/')}><Image src='/images/logo.svg' size='small' /></Menu.Item>
+                <Menu.Item header onClick={() => navigateTo('/')}>Find Programs</Menu.Item>
                 {programUploadSection}
                 <Menu.Menu position='right'>
                     {rightSection}
