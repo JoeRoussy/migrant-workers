@@ -5,6 +5,7 @@ import queryString from 'query-string';
 
 import { getProgramsByType } from '../../../redux/actions/programSearchActions';
 import ProgramCard from '../../components/ProgramCard';
+import Map from '../../components/Map';
 import constants from '../../../../common/constants';
 
 import './styles.css';
@@ -22,6 +23,7 @@ class ProgramSearchResults extends React.Component {
         super(props);
 
         this.onProgramClicked = this.onProgramClicked.bind(this);
+        this.onMarkerClicked = this.onMarkerClicked.bind(this);
 
         const queryParams = queryString.parse(this.props.location.search);
         this.programType = queryParams.type;
@@ -46,10 +48,20 @@ class ProgramSearchResults extends React.Component {
         console.log(`${program.name} was clicked`)
     }
 
+    onMarkerClicked(program) {
+        console.log('A program marker was clicked')
+        console.log(program)
+    }
+
     render() {
         const programCards = this.props.programs.map((program) => (
             <ProgramCard program={program} key={program._id} onClick={() => this.onProgramClicked(program)} />
         ));
+
+        // const programPositions = this.props.programs.map((program) => ({
+        //     lat: Number(program.latitude),
+        //     lng: Number(program.longitude)
+        // }));
 
         return (
             <Container id='programSearchResultsContainer' className='rootContainer'>
@@ -65,7 +77,7 @@ class ProgramSearchResults extends React.Component {
                             </Card.Group>
                         </Grid.Column>
                         <Grid.Column>
-                            Map here...
+                            <Map programs={this.props.programs} onMarkerClicked={this.onMarkerClicked} />
                         </Grid.Column>
                     </Grid>
                     
