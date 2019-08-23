@@ -14,7 +14,7 @@ const ProgramCard = ({
         <Card.Content>
             <Card.Header>{program.name}</Card.Header>
             <Card.Meta>{program.organizationName}</Card.Meta>
-            <Card.Meta>{program.location}</Card.Meta>
+            <Card.Meta>{program.city}</Card.Meta>
             <Card.Description>{program.summary}</Card.Description>
         </Card.Content>
     </Card>

@@ -30,6 +30,11 @@ export const createProgram = ({
 }) => coroutine(function* (req, res) {
     csv.parseFile(req.file.path, { headers: true })
         .on('data', coroutine(function* (data) {
+            if (!data.name) {
+                // This is an empty row
+                return;
+            }
+
             try {
                 yield insertInDb({
                     collection: programsCollection,
@@ -37,11 +42,15 @@ export const createProgram = ({
                         name: data.name,
                         organizationName: data.organization_name,
                         location: data.location,
+                        city: data.city,
+                        address: data.address,
                         latitude: data.latitude,
                         longitude: data.longitude,
-                        link: data.link,
-                        summary: data.summary,
-                        description: data.description,
+                        link: data.link || null,
+                        summary: data.summary || null,
+                        description: data.description || null,
+                        contact_number: data.contact_number,
+                        contact_email: data.contact_email,
                         endDate: data.end_date ? new Date(moment(data.end_date).toISOString())  : null,
                         programType: data.program_type
                     }

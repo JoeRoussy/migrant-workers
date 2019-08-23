@@ -29,6 +29,14 @@ class ProgramSearchResults extends React.Component {
             ? <Button primary as='a' href={program.link} target="_blank">More Information</Button>
             : '';
 
+        const phoneNumber = program.contact_number
+            ? (<p className='row'><Icon name='phone' size='small' /> {program.contact_number}</p>)
+            : '';
+
+        const email = program.contact_email
+            ? (<p className='row'><Icon name='mail' size='small' /> {program.contact_email}</p>)
+            : '';
+
         return (
             <Container id='programDetails' className='rootContainer'>
                 <div className="centered">
@@ -39,9 +47,11 @@ class ProgramSearchResults extends React.Component {
                     </Header>
                     <Header as='h2'>
                         <Header.Content>
-                            <Icon name='map marker alternate' size='large' /> {program.location}
+                            <Icon name='map marker alternate' size='large' /> <span>{program.location} <br/> {program.address}, {program.city} </span>
                         </Header.Content>
                     </Header>
+                    {email}
+                    {phoneNumber}
                     <p className='row descriptions'>{program.description}</p>
                     <div className='row buttonWrapper'>
                         {link}

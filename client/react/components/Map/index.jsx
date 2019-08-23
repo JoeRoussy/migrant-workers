@@ -45,7 +45,7 @@ export default compose(
     loading,
     onMarkerClicked = () => {},
     hideLabel = false,
-    defaultZoom = 10
+    defaultZoom = 7
 }) => {
     if(loading){
         return (
