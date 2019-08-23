@@ -44,7 +44,8 @@ export default compose(
     programs,
     loading,
     onMarkerClicked = () => {},
-    hideLabel = false
+    hideLabel = false,
+    defaultZoom = 10
 }) => {
     if(loading){
         return (
@@ -63,7 +64,7 @@ export default compose(
     const map = markerPositions.length > 0
         ? (
             <GoogleMap
-                defaultZoom={10}
+                defaultZoom={defaultZoom}
                 center={{ lat: avgLat, lng: avgLng }}
             >
                 {markers}
