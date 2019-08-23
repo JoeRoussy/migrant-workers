@@ -7,5 +7,6 @@
 }
 
 #homeSearchWrapper .siteDescription {
+    margin-top: 32px;
     font-size: 16px;
 }

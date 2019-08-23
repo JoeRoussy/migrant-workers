@@ -32,7 +32,7 @@ const NavBar = ({
     if (user) {
         rightSection = [
             <Menu.Item key='profile-link' onClick={() => navigateTo('/profile')}>
-                <Icon name='signup'/>Welcome {user.name}
+                <Icon name='user'/>Welcome {user.name}
             </Menu.Item>,
             <Menu.Item key='sign-out' onClick={() => logout()}>
                 <Icon name='sign out'/>Log Out
@@ -41,13 +41,13 @@ const NavBar = ({
     } else {
         const registerLink = (
             <Menu.Item key='sign-up-link' onClick={() => navigateTo('/sign-up')}>
-                <Icon name='signup'/>Register
+                <Icon name='user'/>Register
             </Menu.Item>
         );
 
         const loginLink = (
             <Menu.Item key='sign-in-link' onClick={() => navigateTo('/sign-in')}>
-                <Icon name='signup'/>Log In
+                <Icon name='user'/>Log In
             </Menu.Item>
         );
 
