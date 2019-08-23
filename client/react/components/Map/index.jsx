@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { compose, withProps } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import { MarkerClusterer } from 'react-google-maps/lib/components/addons/MarkerClusterer';
+import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { Dimmer, Loader } from 'semantic-ui-react';
-
 
 const getAverageForKey = (list, key) => {
     if (!list.length) {
@@ -42,7 +41,15 @@ export default compose(
 
     const markerPositions = programs.map((program) => getPosition(program));
     const markers = programs.map((program, index) => (
-        <Marker position={getPosition(program)} key={index} onClick={() => onMarkerClicked(program)} />
+        <MarkerWithLabel
+            position={getPosition(program)}
+            key={index}
+            onClick={() => onMarkerClicked(program)}
+            labelAnchor={new google.maps.Point(0, 0)}
+            labelStyle={{backgroundColor: "black", 'color': 'white', fontSize: "10px", padding: "5px"}}
+        >
+            <div>{program.name}</div>
+        </MarkerWithLabel>
     ));
 
     const avgLat = getAverageForKey(markerPositions, 'lat');
@@ -60,3 +67,4 @@ export default compose(
 
     return map;
 });
+
