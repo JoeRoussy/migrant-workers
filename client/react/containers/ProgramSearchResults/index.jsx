@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Icon, Card, Grid } from 'semantic-ui-react';
 import queryString from 'query-string';
+import { Element, scroller } from 'react-scroll';
 
-import { getProgramsByType } from '../../../redux/actions/programSearchActions';
+import { getProgramsByType, setActiveProgram, resetActiveProgram } from '../../../redux/actions/programSearchActions';
 import ProgramCard from '../../components/ProgramCard';
 import Map from '../../components/Map';
 import constants from '../../../../common/constants';
@@ -16,6 +17,7 @@ const {
 
 @connect((store)=>({
     programs: store.programSearchReducer.results,
+    activeProgram: store.programSearchReducer.activeProgram
 }))
 
 class ProgramSearchResults extends React.Component {
@@ -46,22 +48,30 @@ class ProgramSearchResults extends React.Component {
     onProgramClicked(program) {
         // TODO: Implement link to program detail page
         console.log(`${program.name} was clicked`)
+        this.props.dispatch(resetActiveProgram())
     }
 
     onMarkerClicked(program) {
         console.log('A program marker was clicked')
         console.log(program)
+
+        scroller.scrollTo(String(program._id), {
+            offset: -150,
+            smooth: 'easeInOutCubic'
+        });
+
+        this.props.dispatch(setActiveProgram(program));
     }
 
     render() {
         const programCards = this.props.programs.map((program) => (
-            <ProgramCard program={program} key={program._id} onClick={() => this.onProgramClicked(program)} />
+            <ProgramCard 
+                program={program}
+                key={program._id}
+                onClick={() => this.onProgramClicked(program)} 
+                isActive={ this.props.activeProgram && this.props.activeProgram._id === program._id }
+            />
         ));
-
-        // const programPositions = this.props.programs.map((program) => ({
-        //     lat: Number(program.latitude),
-        //     lng: Number(program.longitude)
-        // }));
 
         return (
             <Container id='programSearchResultsContainer' className='rootContainer'>

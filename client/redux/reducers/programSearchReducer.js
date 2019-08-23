@@ -2,7 +2,8 @@
 const config = {
     results: [],
     isLoading: false,
-    error: false
+    error: false,
+    activeProgram: null
 };
 
 const programSearchReducer = (state = config, actions) => {
@@ -37,6 +38,22 @@ const programSearchReducer = (state = config, actions) => {
                 loading: false,
                 results: [],
                 error: true
+            };
+
+            break;
+        }
+        case 'SET_ACTIVE_PROGRAM': {
+            state = {
+                ...state,
+                activeProgram: payload
+            };
+
+            break;
+        }
+        case 'RESET_ACTIVE_PROGRAM': {
+            state = {
+                ...state,
+                activeProgram: null
             };
 
             break;

@@ -30,7 +30,7 @@ export default compose(
 )(({
     programs,
     loading,
-    onMarkerClicked
+    onMarkerClicked = () => {}
 }) => {
     if(loading){
         return (
