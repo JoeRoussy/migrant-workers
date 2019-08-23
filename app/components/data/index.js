@@ -140,3 +140,28 @@ export const getProgramTypeByName = async({
         throw new RethrownError(e, `Error finding program by name ${name}`);
     }  
 }
+
+export const getProgramsByType = async({
+    programsCollection = required('programsCollection'),
+    type = requied('type')
+}) => {
+    try {
+        return await programsCollection.find({
+            programType: type,
+            $or: [
+                {
+                    endDate: {
+                        $gte: new Date()
+                    }
+                },
+                {
+                    endDate: null
+                }
+            ]
+        }).toArray();
+    } catch (e) {
+        throw new RethrownError(e, `Error finding programs for type ${type}`);
+    }  
+}
+
+

@@ -1,12 +1,13 @@
 import { wrap as coroutine } from 'co';
 import csv from 'fast-csv';
 import fs from 'fs';
+import moment from 'moment'
 
 import { required } from '../components/custom-utils';
 import { sendError } from './utils';
 import { insert as insertInDb, getById } from '../components/db/service';
 import { convertToObjectId } from '../components/custom-utils';
-import { getProgramsForUser, getProgramTypeByName } from '../components/data';
+import { getProgramsForUser, getProgramTypeByName, getProgramsByType } from '../components/data';
 
 import constants from '../../common/constants';
 
@@ -41,7 +42,7 @@ export const createProgram = ({
                         link: data.link,
                         summary: data.summary,
                         description: data.description,
-                        endDate: data.end_date || null,
+                        endDate: data.end_date ? new Date(moment(data.end_date).toISOString())  : null,
                         programType: data.program_type
                     }
                 });
@@ -93,9 +94,10 @@ export const getPrograms = ({
 
     try {
         if (req.query.type) {
-            programs = yield programsCollection
-                .find({ programType: req.query.type })
-                .toArray();
+            programs = yield getProgramsByType({
+                programsCollection,
+                type: req.query.type
+            });
         } else {
             programs = yield programsCollection.find({}).toArray();
         }
