@@ -4,7 +4,7 @@ import fs from 'fs';
 
 import { required } from '../components/custom-utils';
 import { sendError } from './utils';
-import { insert as insertInDb } from '../components/db/service';
+import { insert as insertInDb, getById } from '../components/db/service';
 import { convertToObjectId } from '../components/custom-utils';
 import { getProgramsForUser, getProgramTypeByName } from '../components/data';
 
@@ -111,4 +111,27 @@ export const getPrograms = ({
     }
 
     return res.json({ programs });
+});
+
+export const getProgramById = ({
+    programsCollection = required('programsCollection'),
+    logger = required('logger', 'You must pass a logging instance for this function to use')
+}) => coroutine(function* (req, res) {
+    try {
+        const program = yield getById({
+            collection: programsCollection,
+            id: req.params.programId
+        });
+
+        return res.json({ program });
+    } catch (e) {
+        logger.error(e, `Error getting program with id: ${req.params.programId}`);
+
+        return sendError({
+            res,
+            status: 500,
+            message: 'There was an error getting programs',
+            errorKey: GENERIC_FETCH_ERROR
+        });
+    }
 });

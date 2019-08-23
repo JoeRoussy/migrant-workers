@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Icon, Card, Grid } from 'semantic-ui-react';
 import queryString from 'query-string';
 import { Element, scroller } from 'react-scroll';
+import { push } from 'react-router-redux';
 
 import { getProgramsByType, setActiveProgram, resetActiveProgram } from '../../../redux/actions/programSearchActions';
 import ProgramCard from '../../components/ProgramCard';
@@ -46,15 +47,11 @@ class ProgramSearchResults extends React.Component {
     }
 
     onProgramClicked(program) {
-        // TODO: Implement link to program detail page
-        console.log(`${program.name} was clicked`)
-        this.props.dispatch(resetActiveProgram())
+        this.props.dispatch(resetActiveProgram());
+        this.props.dispatch(push(`/programs/${program._id}`));
     }
 
     onMarkerClicked(program) {
-        console.log('A program marker was clicked')
-        console.log(program)
-
         scroller.scrollTo(String(program._id), {
             offset: -150,
             smooth: 'easeInOutCubic'

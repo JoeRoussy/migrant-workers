@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { compose, withProps } from 'recompose';
-import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import { MarkerWithLabel } from 'react-google-maps/lib/components/addons/MarkerWithLabel';
 import { Dimmer, Loader } from 'semantic-ui-react';
 
@@ -17,6 +17,20 @@ const getAverageForKey = (list, key) => {
 
 const getPosition = (program) => ({ lat: Number(program.latitude), lng: Number(program.longitude) });
 
+const getMarker = (program, index, hideLabel, onMarkerClicked) => (hideLabel
+    ? <Marker position={getPosition(program)} key={index} onClick={() => onMarkerClicked(program)} /> 
+    : (
+        <MarkerWithLabel
+            position={getPosition(program)}
+            key={index}
+            onClick={() => onMarkerClicked(program)}
+            labelAnchor={new google.maps.Point(0, 0)}
+            labelStyle={{backgroundColor: "black", 'color': 'white', fontSize: "10px", padding: "5px"}}
+        >
+            <div>{program.name}</div>
+        </MarkerWithLabel>
+    ));
+
 export default compose(
     withProps({
         googleMapURL: `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
@@ -29,7 +43,8 @@ export default compose(
 )(({
     programs,
     loading,
-    onMarkerClicked = () => {}
+    onMarkerClicked = () => {},
+    hideLabel = false
 }) => {
     if(loading){
         return (
@@ -40,17 +55,7 @@ export default compose(
     }
 
     const markerPositions = programs.map((program) => getPosition(program));
-    const markers = programs.map((program, index) => (
-        <MarkerWithLabel
-            position={getPosition(program)}
-            key={index}
-            onClick={() => onMarkerClicked(program)}
-            labelAnchor={new google.maps.Point(0, 0)}
-            labelStyle={{backgroundColor: "black", 'color': 'white', fontSize: "10px", padding: "5px"}}
-        >
-            <div>{program.name}</div>
-        </MarkerWithLabel>
-    ));
+    const markers = programs.map((program, index) => getMarker(program, index, hideLabel, onMarkerClicked));
 
     const avgLat = getAverageForKey(markerPositions, 'lat');
     const avgLng = getAverageForKey(markerPositions, 'lng');
