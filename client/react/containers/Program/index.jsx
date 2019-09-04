@@ -34,7 +34,7 @@ class ProgramSearchResults extends React.Component {
             : '';
 
         const email = program.contact_email
-            ? (<p className='row'><Icon name='mail' size='small' /> {program.contact_email}</p>)
+            ? (<p className='row'><Icon name='mail' size='small' />{program.contact_email}</p>)
             : '';
 
         return (

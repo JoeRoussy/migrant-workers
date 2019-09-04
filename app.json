@@ -1,6 +1,6 @@
 {
     "apps": [{
-        "name": "circ",
+        "name": "migrant-worker",
         "script": "app/index.js",
         "exec_mode": "cluster_mode",
         "instances": 2,
