@@ -11,6 +11,6 @@ export const submitForm = (formData) => (dispatch) => {
         promise: axios.post(`${process.env.API_ROOT}/api/users`, submissionData),
         submitActionName: 'SIGN_UP_FORM_SUBMIT',
         dispatch,
-        successToast: 'Welcome to CIRC!'
+        successToast: 'Welcome!'
     });
 };

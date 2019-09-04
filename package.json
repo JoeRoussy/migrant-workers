@@ -1,7 +1,7 @@
 {
-  "name": "circ",
+  "name": "migrant-worker",
   "version": "1.0.0",
-  "description": "A site to connect indigenous resources and the indigenous community",
+  "description": "A site for migrant workers in the niagara region.",
   "main": "webpack.config.js",
   "scripts": {
     "start": "node app/index.js",
@@ -12,16 +12,8 @@
     "start-prod": "node_modules/.bin/pm2 startOrGracefulReload app.json",
     "stop": "node_modules/.bin/pm2 stop app.json"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JoeRoussy/roomie.git"
-  },
-  "author": "Brandon Baksh, Jugal Patel, Ian Paterson, Joe Roussy",
+  "author": "Joe Roussy",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/JoeRoussy/circ/issues"
-  },
-  "homepage": "https://github.com/JoeRoussy/circ#readme",
   "dependencies": {
     "babel-core": "6.26.3",
     "babel-loader": "7.1.5",
