@@ -1,7 +1,8 @@
 const config = {
     isProcessing: false,
     errorMessage: null,
-    selectedFile: null
+    selectedFile: null,
+    isDeleteModalOpen: false
 };
 
 const uploadProgramsReducer = (state = config, actions) => {
@@ -62,7 +63,8 @@ const uploadProgramsReducer = (state = config, actions) => {
         case 'DELETE_PROGRAMS_FULFILLED': {
             state = {
                 ...state,
-                isProcessing: false
+                isProcessing: false,
+                isDeleteModalOpen: false
             };
 
             break;
@@ -71,7 +73,26 @@ const uploadProgramsReducer = (state = config, actions) => {
         case 'DELETE_PROGRAMS_REJECTED': {
             state = {
                 ...state,
-                isProcessing: false
+                isProcessing: false,
+                isDeleteModalOpen: false
+            };
+
+            break;
+        }
+
+        case 'OPEN_DELETE_PROGRAMS_CONFIRMATION_MODAL': {
+            state = {
+                ...state,
+                isDeleteModalOpen: true
+            };
+
+            break;
+        }
+
+        case 'CLOSE_DELETE_PROGRAMS_CONFIRMATION_MODAL': {
+            state = {
+                ...state,
+                isDeleteModalOpen: false
             };
 
             break;

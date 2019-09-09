@@ -42,3 +42,11 @@ export const deletePrograms = () => ({
             toast.error('Error deleting programs.');
         })
 });
+
+export const openDeleteModal = () => ({
+    type: 'OPEN_DELETE_PROGRAMS_CONFIRMATION_MODAL'
+});
+
+export const closeDeleteModal = () => ({
+    type: 'CLOSE_DELETE_PROGRAMS_CONFIRMATION_MODAL'
+});
