@@ -7,11 +7,12 @@ const ProgramSearchCard = ({
     programType,
     iconName,
     onClick,
-    color
+    color,
+    isCustom
 }) => (
     <Card className='programSearchCard' onClick={onClick} color={color}>
         <div className='cardIconWrapper'>
-            <Icon name={iconName} size='massive' color={color} />
+            {isCustom ? <i className={`customIcon ${iconName}`}></i> : <Icon name={iconName} size='massive' color={color} /> }
         </div>
         <Card.Content>
             <Card.Header>{programType}</Card.Header>

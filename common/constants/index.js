@@ -91,8 +91,9 @@ const constants = {
         },
         CHURCH: {
             NAME: "Church",
-            ICON: "home",
-            COLOR: "brown"
+            ICON: "fas fa-church brown",
+            COLOR: "brown",
+            "IS_ICON_CUSTOM": true
         },
         ONLINE_LINKS: {
             NAME: "Online Links",

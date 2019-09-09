@@ -46,7 +46,31 @@ class Home extends Component {
                 WELCOME_SUPPORT,
                 EVENTS
             } = {}
-        } = constants
+        } = constants;
+
+        const programCards = [
+            HEALTH,
+            BIKES,
+            LEGAL,
+            CLOTHES,
+            FOOD,
+            ESL,
+            WIFI,
+            FINANCIAL_SERVICES,
+            CHURCH,
+            ONLINE_LINKS,
+            WELCOME_SUPPORT,
+            EVENTS
+        ].map((CARD_CONFIG, i) => (
+            <ProgramSearchCard
+                programType={CARD_CONFIG.NAME}
+                onClick={() => this.onProgramSearchCardClicked(CARD_CONFIG.NAME)}
+                iconName={CARD_CONFIG.ICON}
+                color={CARD_CONFIG.COLOR}
+                isCustom={CARD_CONFIG.IS_ICON_CUSTOM || false}
+                key={i}
+            />
+        ))
 
         return (
             <div id='home'>
@@ -61,78 +85,7 @@ class Home extends Component {
                             <p>If you know of any other resources not listed here, please email us at: <a href="mailto:migrantfarmworkers.ontario@gmail.com">migrantfarmworkers.ontario@gmail.com</a></p>
                         </div>
                         <div id="programTileWrapper" className='ui cards centered'>
-                            <ProgramSearchCard
-                                programType={HEALTH.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(HEALTH.NAME)}
-                                iconName={HEALTH.ICON}
-                                color={HEALTH.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={FOOD.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(FOOD.NAME)}
-                                iconName={FOOD.ICON}
-                                color={FOOD.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={BIKES.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(BIKES.NAME)}
-                                iconName={BIKES.ICON}
-                                color={BIKES.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={LEGAL.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(LEGAL.NAME)}
-                                iconName={LEGAL.ICON}
-                                color={LEGAL.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={CLOTHES.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(CLOTHES.NAME)}
-                                iconName={CLOTHES.ICON}
-                                color={CLOTHES.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={ESL.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(ESL.NAME)}
-                                iconName={ESL.ICON}
-                                color={ESL.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={WIFI.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(WIFI.NAME)}
-                                iconName={WIFI.ICON}
-                                color={WIFI.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={FINANCIAL_SERVICES.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(FINANCIAL_SERVICES.NAME)}
-                                iconName={FINANCIAL_SERVICES.ICON}
-                                color={FINANCIAL_SERVICES.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={CHURCH.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(CHURCH.NAME)}
-                                iconName={CHURCH.ICON}
-                                color={CHURCH.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={ONLINE_LINKS.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(ONLINE_LINKS.NAME)}
-                                iconName={ONLINE_LINKS.ICON}
-                                color={ONLINE_LINKS.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={WELCOME_SUPPORT.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(WELCOME_SUPPORT.NAME)}
-                                iconName={WELCOME_SUPPORT.ICON}
-                                color={WELCOME_SUPPORT.COLOR}
-                            />
-                            <ProgramSearchCard
-                                programType={EVENTS.NAME}
-                                onClick={() => this.onProgramSearchCardClicked(EVENTS.NAME)}
-                                iconName={EVENTS.ICON}
-                                color={EVENTS.COLOR}
-                            />
+                            {programCards}
                         </div>
                     </Container>
                 </div>

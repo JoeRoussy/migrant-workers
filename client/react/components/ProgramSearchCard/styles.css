@@ -2,10 +2,14 @@
     font-size: 2em;
 }
 
-.cardIconWrapper i.massive.icon {
+.cardIconWrapper i.massive.icon, .cardIconWrapper i.customIcon {
     margin: 32px 0;
     font-size: 14em;
     color: black;
+}
+
+.cardIconWrapper i.customIcon.brown {
+    color: #a5673f;
 }
 
 
