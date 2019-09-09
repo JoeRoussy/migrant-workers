@@ -8,8 +8,12 @@
     color: black;
 }
 
-.cardIconWrapper i.customIcon.brown {
+i.customIcon.brown {
     color: #a5673f;
+}
+
+.customIcon.massive {
+    font-size: 8em;
 }
 
 

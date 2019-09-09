@@ -70,10 +70,14 @@ class ProgramSearchResults extends React.Component {
             />
         ));
 
+        const programIcon = this.programTypeConfigElement.IS_ICON_CUSTOM
+            ? <i className={`customIcon massive ${this.programTypeConfigElement.ICON}`}></i>
+            : <Icon name={this.programTypeConfigElement.ICON} size='massive' color={this.programTypeConfigElement.COLOR} />;
+
         return (
             <Container id='programSearchResultsContainer' className='rootContainer'>
                 <div className="centered">
-                    <Icon name={this.programTypeConfigElement.ICON} size='massive' color={this.programTypeConfigElement.COLOR} />
+                    {programIcon}
                 </div>
                 <h1>{this.programType}</h1>
                 <div className="programCardWrapper">
