@@ -85,7 +85,7 @@ const constants = {
             COLOR: "violet"
         },
         FINANCIAL_SERVICES: {
-            NAME: "Tax + Financial Services",
+            NAME: "Tax and Financial Services",
             ICON: "dollar sign",
             COLOR: "green"
         },
