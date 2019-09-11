@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Icon, Card, Grid } from 'semantic-ui-react';
+import { Container, Icon, Card, Grid, Message } from 'semantic-ui-react';
 import queryString from 'query-string';
 import { Element, scroller } from 'react-scroll';
 import { push } from 'react-router-redux';
@@ -74,6 +74,28 @@ class ProgramSearchResults extends React.Component {
             ? <i className={`customIcon massive ${this.programTypeConfigElement.ICON}`}></i>
             : <Icon name={this.programTypeConfigElement.ICON} size='massive' color={this.programTypeConfigElement.COLOR} />;
 
+        const body = programCards.length > 0
+            ? (
+                <Grid stackable columns={2}>
+                    <Grid.Column>
+                        <Card.Group centered itemsPerRow={1}>
+                            {programCards}
+                        </Card.Group>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Map programs={this.props.programs} onMarkerClicked={this.onMarkerClicked} />
+                    </Grid.Column>
+                </Grid>
+            ) : (
+                <Message warning icon>
+                    <Icon name='warning sign' />
+                    <Message.Content>
+                        <Message.Header>There are no programs of that type!</Message.Header>
+                        <p>If you know of a program that should be listed, please email us at <a href='mailto:migrantfarmworkers.ontario@gmail.com'>migrantfarmworkers.ontario@gmail.com</a></p>
+                    </Message.Content>
+                </Message>
+            );
+
         return (
             <Container id='programSearchResultsContainer' className='rootContainer'>
                 <div className="centered">
@@ -81,17 +103,7 @@ class ProgramSearchResults extends React.Component {
                 </div>
                 <h1>{this.programType}</h1>
                 <div className="programCardWrapper">
-                    <Grid stackable columns={2}>
-                        <Grid.Column>
-                            <Card.Group centered itemsPerRow={1}>
-                                {programCards}
-                            </Card.Group>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Map programs={this.props.programs} onMarkerClicked={this.onMarkerClicked} />
-                        </Grid.Column>
-                    </Grid>
-                    
+                    {body}
                 </div>
             </Container>
         );
