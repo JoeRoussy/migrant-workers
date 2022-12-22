@@ -40,7 +40,7 @@
     "history": "4.7.2",
     "image-type": "3.0.0",
     "json-loader": "0.5.7",
-    "jsonwebtoken": "8.3.0",
+    "jsonwebtoken": "9.0.0",
     "jwt-decode": "2.2.0",
     "lodash": "4.17.15",
     "marked": "0.7.0",
